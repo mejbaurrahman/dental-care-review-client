@@ -17,6 +17,7 @@ export default function Navigation() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Link className='text-white text-decoration-none ms-2 px-2' to='/'>Home</Link>
+            <Link className='text-white text-decoration-none ms-2 px-2' to='/services'>Services</Link>
 
             <Link className='text-white text-decoration-none ms-2 px-2' to='/about'>About Me</Link>
           {

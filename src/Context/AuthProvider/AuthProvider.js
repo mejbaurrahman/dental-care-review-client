@@ -12,6 +12,7 @@ export default function AuthProvider({children}) {
     const [authError, setAuthError] = useState('');
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(true);
+    const [show, setShow] = useState(false);
     // const navigate = useNavigate();
     const updateUser=(name, photoURL)=>{
         setLoading(true);
@@ -56,7 +57,7 @@ export default function AuthProvider({children}) {
     }, [user?.displayName])
     
 
-    const authInfo= {registration, login, logout,loading, user, updateUser,setUser};
+    const authInfo= {registration, login, logout,loading, show, setShow, user, updateUser,setUser};
   return (
     <AuthContext.Provider value={authInfo}>
         {children}
