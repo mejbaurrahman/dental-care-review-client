@@ -5,6 +5,8 @@ import Main from './Layouts/Main/Main';
 import Home from './Pages/Home/Home';
 import Login from './Components/Login/Login';
 import Registration from './Components/Registration/Registration';
+import About from './Components/About/About';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,10 @@ const router = createBrowserRouter([
         path:'/register',
         element:<Registration></Registration>
       },
+      {
+        path:'/about',
+        element:<PrivateRoute><About></About></PrivateRoute>
+      },
 
     ]
   }
@@ -31,7 +37,6 @@ function App() {
   return (
     <div className="App">
      <RouterProvider router={router}>
-     
      </RouterProvider>
      
     </div>
