@@ -19,7 +19,7 @@ export default function AddAService() {
         };
 
         // setService(serviceData);
-        console.log(serviceData);
+        
         fetch('http://localhost:5000/services',{
           method:'POST',
           headers:{

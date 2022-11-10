@@ -10,7 +10,8 @@ import Login from './Components/Login/Login';
 import Registration from './Components/Registration/Registration';
 import About from './Components/About/About';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
-
+import 'react-photo-view/dist/react-photo-view.css';
+import ServiceDetail from './Components/ServiceDetail/ServiceDetail';
 const router = createBrowserRouter([
   {
     path:'/',
@@ -27,6 +28,11 @@ const router = createBrowserRouter([
       {
         path:'/services',
         element:<Services></Services>
+      },
+      {
+        path:'/service/:id',
+        loader: ({params})=>fetch(`http://localhost:5000/service/${params.id}`),
+        element:<ServiceDetail></ServiceDetail>
       },
       {
         path:'/register',
