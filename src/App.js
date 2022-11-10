@@ -13,6 +13,7 @@ import PrivateRoute from './PrivateRoute/PrivateRoute';
 import 'react-photo-view/dist/react-photo-view.css';
 import ServiceDetail from './Components/ServiceDetail/ServiceDetail';
 import Blog from './Pages/Blog/Blog';
+import NotFound from './Pages/NotFound/NotFound';
 const router = createBrowserRouter([
   {
     path:'/',
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       },
 
     ]
+  },
+  {
+    path: '*',
+    element:<NotFound></NotFound>
   }
 ])
 function App() {
