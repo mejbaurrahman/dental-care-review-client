@@ -16,7 +16,7 @@ export default function ServiceDetail() {
   const {user} = useContext(AuthContext);
   const loader = useLoaderData();
   const {serviceName, price, rating, description, _id, img} = loader;
-  useTitle(`service: ${serviceName}`)
+  useTitle(`Service: ${serviceName}`)
   useEffect(()=>{
     fetch(`http://localhost:5000/serviceReviews?serviceId=${_id}`)
     .then(res=>res.json())

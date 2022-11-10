@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { Spinner } from 'react-bootstrap';
 import toast, { Toaster } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import useTitle from '../../Components/hooks/useTitle';
 
 export default function AddAService() {
-   
+   useTitle('Add Service')
     const [loadingService, setLoadingService]= useState(false);
     const [service, setService] = useState({});
     const handleAddService =(e)=>{

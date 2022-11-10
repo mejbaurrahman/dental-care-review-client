@@ -10,9 +10,11 @@ export default function Navigation() {
     <div>
         <Navbar bg="primary" expand='lg'>
         <Container>
-          <Navbar.Brand className='text-white' href="#home">
+          
+          <Navbar.Brand className='text-white text-decoration-none'>
             <img src={logo} className='rounded' style={{width:'50px'}} alt="" srcset="" /> MDC
           </Navbar.Brand>
+         
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
