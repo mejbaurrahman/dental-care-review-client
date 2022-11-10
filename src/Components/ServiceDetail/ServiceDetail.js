@@ -16,20 +16,11 @@ export default function ServiceDetail() {
   const {user} = useContext(AuthContext);
   const [length, setLength]= useState(null);
   const loader = useLoaderData();
-  // const [loader, setLoader] = useState({})
-  // let { id } = useParams();
-  // console.log(id);
-  // useEffect(()=>{
-  //   fetch(`https://dental-care-server.vercel.app/services/${id}`)
-  //   .then(res=>res.json())
-  //   .then(data=>{
-  //     console.log(data);
-  //   })
-  // })
+ 
   const {serviceName, price, rating, description, _id, img} = loader;
   useTitle(`Service: ${serviceName}`)
   useEffect(()=>{
-    fetch(`http://localhost:5000/serviceReviews?serviceId=${_id}`)
+    fetch(`https://dental-care-server.vercel.app/serviceReviews?serviceId=${_id}`)
     .then(res=>res.json())
     .then(data=>{
       setLength(data.length);
@@ -59,7 +50,7 @@ export default function ServiceDetail() {
           time
       };
      
-      fetch('http://localhost:5000/reviews',{
+      fetch('https://dental-care-server.vercel.app/reviews',{
         method:'POST',
         headers:{
           'content-type': 'application/json'
