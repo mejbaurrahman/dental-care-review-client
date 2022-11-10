@@ -5,7 +5,7 @@ import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import useTitle from '../hooks/useTitle'
 
 export default function Login() {
-    useTitle('MDC: Login');
+    useTitle('Login');
     const {user, login,setShow, setUser} = useContext(AuthContext);
     const [loadingLogin, setLoadingLogin] = useState(false);
     const location = useLocation();

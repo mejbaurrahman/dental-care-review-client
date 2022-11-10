@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Spinner } from 'react-bootstrap';
 import toast, { Toaster } from 'react-hot-toast';
+import useTitle from '../../Components/hooks/useTitle';
 import MyReview from '../../Components/MyReview/MyReview';
 import Review from '../../Components/Review/Review';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
@@ -9,6 +10,7 @@ export default function MyReviews() {
   const [reviews, setReviews]= useState([]);
   const {user, logout} = useContext(AuthContext);
   const [myReviewLoader, setMyReviewLoader] = useState(true);
+  useTitle('My Reviews')
   useEffect(()=>{
     fetch(`http://localhost:5000/reviews?email=${user?.email}`,{
       headers:{

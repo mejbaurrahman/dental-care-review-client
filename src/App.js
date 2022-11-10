@@ -39,10 +39,6 @@ const router = createBrowserRouter([
         element:<Registration></Registration>
       },
       {
-        path:'/about',
-        element:<PrivateRoute><About></About></PrivateRoute>
-      },
-      {
         path:'/addAService',
         element:<PrivateRoute><AddAService></AddAService></PrivateRoute>
       },

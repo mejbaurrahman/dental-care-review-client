@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import toast, { Toaster } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import useTitle from '../hooks/useTitle'
@@ -21,7 +22,7 @@ export default function Registration() {
         })
         .then(user=>{
             updateUser(name, photoURL);
-            alert("successfully Created");
+            toast.success('Registration Complete! Please Login Now');
             navigate('/login', {replace:true});
             logout();
             
@@ -32,6 +33,11 @@ export default function Registration() {
 ;
     }
   return (
+    <>
+        <Toaster
+  position="top-center"
+  reverseOrder={false}
+/>
     <div className='d-flex justify-content-center align-items-center'>
       <div className='w-50'>
       <h1 className='text-center my-3 fw-bold'>Registration</h1>
@@ -46,5 +52,6 @@ export default function Registration() {
       <h5>Already User? Please <Link to='/login'>Login</Link> </h5>
     </div>
     </div>
+    </>
   )
 }

@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useEffect, useState } from 'react'
 import { Spinner } from 'react-bootstrap';
 import toast, { Toaster } from 'react-hot-toast';
@@ -5,6 +6,7 @@ import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import useTitle from '../hooks/useTitle';
 import Review from '../Review/Review';
+import { faStar, faMoneyCheck } from '@fortawesome/free-solid-svg-icons'
 
 export default function ServiceDetail() {
   const [reviews, setReviews] = useState([]);
@@ -69,16 +71,20 @@ export default function ServiceDetail() {
   position="top-center"
   reverseOrder={false}
 />
-<div className="card mb-3 my-5" >
+<div className="card mb-3 my-5 border border-1 border-primary" >
   <div className="row g-0">
     <div className="col-md-4">
       <img src={img} className="img-fluid rounded-start" style={{objectFit:'cover'}} alt="..."/>
     </div>
     <div className="col-md-8">
       <div className="card-body">
-        <h5 className="card-title">{serviceName}</h5>
-        <p className="card-text">{description}</p>
-        <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
+        <h5 className="card-title text-primary text-uppercase text-md-start">{serviceName}</h5>
+        <hr className='text-primary'/>
+        <p className="card-text text-md-start">{description}</p>
+       <div className='d-flex justify-content-start'>
+       <p className="card-text"><small className="text-muted text-primary mx-3"><FontAwesomeIcon icon={faStar}></FontAwesomeIcon> {rating}</small></p>
+        <p className="card-text"><small className="text-muted text-primary"><FontAwesomeIcon icon={faMoneyCheck}></FontAwesomeIcon> {price}</small></p>
+       </div>
       </div>
     </div>
   </div>
