@@ -24,11 +24,25 @@ export default function Login() {
       
       login(email, password)
       .then(userCredential=>{
-        const result = userCredential.user;
-        setShow(true);
-        setLoadingLogin(false);
-        navigate(from, { replace: true });
-        console.log(result);
+        const user = userCredential.user;
+        
+        const currentUser = {email:user.email};
+        fetch(`http://localhost:5000/jwt`,{
+          method:'POST',
+          headers:{
+            'content-type':'application/json'
+          },
+          body: JSON.stringify(currentUser)
+        }).then(res=>res.json())
+        .then(data=>{
+          console.log(data);
+          localStorage.setItem('token', data.token);
+          setShow(true);
+          setLoadingLogin(false);
+          navigate(from, { replace: true });
+        })
+       
+        // console.log(user);
         
         
       })
@@ -37,6 +51,31 @@ export default function Login() {
       })
       
     }
+    // const handleLogin =(e)=>{
+
+    //   e.preventDefault();
+    //   setLoadingLogin(true);
+    //   const form = e.target;
+    //   const email = form.email.value;
+    //   const password = form.password.value;
+      
+    //   login(email, password)
+    //   .then(userCredential=>{
+    //     const result = userCredential.user;
+    //     setShow(true);
+    //     setLoadingLogin(false);
+        
+
+    //     navigate(from, { replace: true });
+    //     console.log(result);
+        
+        
+    //   })
+    //   .catch((error)=>{
+    //     console.log(error.message);
+    //   })
+      
+    // }
   return (
     <div className='d-flex justify-content-center align-items-center'>
       <div className='w-50'>

@@ -5,17 +5,37 @@ import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 export default function MyReviews() {
   const [reviews, setReviews]= useState([]);
-  const {user} = useContext(AuthContext);
+  const {user, logout} = useContext(AuthContext);
+  const [myReviewLoader, setMyReviewLoader] = useState(true);
   useEffect(()=>{
-    fetch(`http://localhost:5000/reviews?email=${user?.email}`)
-    .then(res=>res.json())
+    fetch(`http://localhost:5000/reviews?email=${user?.email}`,{
+      headers:{
+        authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+    .then(res => {
+      if (res.status === 401 || res.status === 403) {
+          return logout();
+      }
+      return res.json();
+  })
     .then(data=>{
       // console.log(data);
       const r= data.sort(function(a, b){return a.time - b.time}).reverse();
       setReviews(r);
       
     })
-  }, [])
+  }, [user?.email, logout])
+  // useEffect(()=>{
+  //   fetch(`http://localhost:5000/reviews?email=${user?.email}`)
+  //   .then(res=>res.json())
+  //   .then(data=>{
+  //     // console.log(data);
+  //     const r= data.sort(function(a, b){return a.time - b.time}).reverse();
+  //     setReviews(r);
+      
+  //   })
+  // }, [])
  
  const handleUpdate=(id,review)=>{
          const reviewData = review.r;
