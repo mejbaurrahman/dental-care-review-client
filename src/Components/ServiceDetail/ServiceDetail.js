@@ -74,7 +74,7 @@ export default function ServiceDetail() {
 <div className="card mb-3 my-5 border border-1 border-primary" >
   <div className="row g-0">
     <div className="col-md-4">
-      <img src={img} className="img-fluid rounded-start" style={{objectFit:'cover'}} alt="..."/>
+      <img src={img} className="img-fluid rounded-start" style={{objectFit:'cover', height:'100%'}} alt="..."/>
     </div>
     <div className="col-md-8">
       <div className="card-body">

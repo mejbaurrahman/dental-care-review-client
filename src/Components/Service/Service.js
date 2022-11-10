@@ -3,6 +3,8 @@ import { Button, Card } from 'react-bootstrap';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import { Link } from 'react-router-dom';
+import { faStar, faMoneyCheck, faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function Service({service}) {
     const {serviceName, img, rating, _id, price, description}= service;
@@ -24,15 +26,15 @@ export default function Service({service}) {
         </Card.Text>
         <div className='d-flex justify-content-evenly'>
         <Card.Text>
-          Rating: {rating}
+          <FontAwesomeIcon className='me-2' icon={faStar}></FontAwesomeIcon> {rating}
         </Card.Text>
         <Card.Text>
-          price: {price}
+        <FontAwesomeIcon className='me-2' icon={faMoneyCheck}></FontAwesomeIcon> {price}
         </Card.Text>
         </div>
       </Card.Body>
       <Card.Footer>
-      <Link to={`/service/${_id}`}><Button variant="primary">Details</Button></Link>
+      <Link to={`/service/${_id}`}><Button variant="primary">Details<FontAwesomeIcon className='ms-2' icon={faArrowAltCircleRight}></FontAwesomeIcon> </Button></Link>
       </Card.Footer>
     </Card>
     </div>

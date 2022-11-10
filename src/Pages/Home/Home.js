@@ -1,6 +1,10 @@
+import { faArrowRight, faArrowRotateRight, faMoneyCheck } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useEffect, useState } from 'react'
 import { Spinner, Toast } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
+import About from '../../Components/About/About';
+import Banner from '../../Components/Banner/Banner';
 import ContactMe from '../../Components/ContactMe/ContactMe';
 import useTitle from '../../Components/hooks/useTitle';
 import Service from '../../Components/Service/Service';
@@ -22,6 +26,7 @@ export default function Home() {
   }, [])
   return (
     <>
+    <Banner></Banner>
     {
       loadHome? <div className='my-3'><Spinner variant='primary' animation='border'></Spinner></div>: 
       <div className='container mt-5'>
@@ -38,8 +43,9 @@ export default function Home() {
        }
     </div>
     <div className='d-flex justify-content-lg-end justify-content-center'>
-        <Link to='/services'><button className='btn btn-primary'>See All</button></Link>
+        <Link to='/services'><button className='btn btn-primary'>See All<FontAwesomeIcon className='ms-2' icon={faArrowRight}></FontAwesomeIcon></button></Link>
     </div>
+    <About></About>
     <ContactMe></ContactMe>
     </div>
     }

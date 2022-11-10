@@ -1,3 +1,5 @@
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react'
 import { Link } from 'react-router-dom';
 
@@ -40,8 +42,8 @@ export default function MyReview({review, handleDelete, handleUpdate}) {
         </div>
         <div className='col'>
             <div className='d-flex justify-content-around align-items-center'>
-               <button className='btn btn-warning' data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
-               <button onClick={()=>handleDelete(review._id)} className='btn btn-danger'>Delete</button>
+               <button className='btn btn-warning' data-bs-toggle="modal" data-bs-target="#exampleModal"><FontAwesomeIcon icon={faEdit}></FontAwesomeIcon></button>
+               <button onClick={()=>handleDelete(review._id)} className='btn btn-danger'><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button>
             </div>
         </div>
 
