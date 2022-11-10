@@ -1,6 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { Spinner } from 'react-bootstrap';
+import toast, { Toaster } from 'react-hot-toast';
 import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
+import useTitle from '../hooks/useTitle';
 import Review from '../Review/Review';
 
 export default function ServiceDetail() {
@@ -10,9 +13,9 @@ export default function ServiceDetail() {
   const {user} = useContext(AuthContext);
   const loader = useLoaderData();
   const {serviceName, price, rating, description, _id, img} = loader;
-
+  useTitle(`${serviceName}`)
   useEffect(()=>{
-    fetch(`http://localhost:5000/reviews?serviceId=${_id}`)
+    fetch(`http://localhost:5000/serviceReviews?serviceId=${_id}`)
     .then(res=>res.json())
     .then(data=>{
       // console.log(data);
@@ -53,7 +56,7 @@ export default function ServiceDetail() {
         console.log(data);
         setReviews(data);
         setNewReview(review);
-        // alert('Insert review successfully');
+        toast.success('Review added successfully');
         form.reset();
       }).catch(error=>{
         console.log(error);
@@ -62,6 +65,10 @@ export default function ServiceDetail() {
   }
   return (
 <div className='my-5 container'>
+<Toaster
+  position="top-center"
+  reverseOrder={false}
+/>
 <div className="card mb-3 my-5" >
   <div className="row g-0">
     <div className="col-md-4">
@@ -95,7 +102,7 @@ export default function ServiceDetail() {
     }
 </div>
 {
-  rLoad? <></>:<div className='my-3'>
+  rLoad? <><Spinner variant="primary" animation="grow" /></>:<div className='my-3'>
   {
     reviews.map((review)=><Review key={review._id}
     review={review}

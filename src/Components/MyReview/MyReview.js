@@ -16,7 +16,7 @@ export default function MyReview({review, handleDelete, handleUpdate}) {
   return (
     <>
 
-    <div className='row row-cols-md-4 row-cols-1 g-3 my-2 pb-3 border border-1 border-opacity-25 border-primary' >
+    <div className='row row-cols-md-5 row-cols-1 g-3 my-2 pb-3 border border-1 border-opacity-25 border-primary' >
         <div className='col'>
             <div className='d-flex justify-content-start align-items-center mb-2'>
                 <img src={review.photURL} className='rounded-circle' alt="" style={{width:'50px'}} />
@@ -25,7 +25,12 @@ export default function MyReview({review, handleDelete, handleUpdate}) {
         </div>
         <div className='col'>
             <div className='d-flex justify-content-start align-items-center'>
-               <p>{review.review}</p>
+               <p>review: {review.review}</p>
+            </div>
+        </div>
+        <div className='col'>
+            <div className='d-flex justify-content-start align-items-center'>
+               <p>Service: {review.serviceName}</p>
             </div>
         </div>
         <div className='col'>

@@ -1,4 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { Spinner } from 'react-bootstrap';
+import toast, { Toaster } from 'react-hot-toast';
 import MyReview from '../../Components/MyReview/MyReview';
 import Review from '../../Components/Review/Review';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
@@ -15,6 +17,8 @@ export default function MyReviews() {
     })
     .then(res => {
       if (res.status === 401 || res.status === 403) {
+          
+          setMyReviewLoader(false);
           return logout();
       }
       return res.json();
@@ -23,19 +27,11 @@ export default function MyReviews() {
       // console.log(data);
       const r= data.sort(function(a, b){return a.time - b.time}).reverse();
       setReviews(r);
+      setMyReviewLoader(false)
       
     })
   }, [user?.email, logout])
-  // useEffect(()=>{
-  //   fetch(`http://localhost:5000/reviews?email=${user?.email}`)
-  //   .then(res=>res.json())
-  //   .then(data=>{
-  //     // console.log(data);
-  //     const r= data.sort(function(a, b){return a.time - b.time}).reverse();
-  //     setReviews(r);
-      
-  //   })
-  // }, [])
+
  
  const handleUpdate=(id,review)=>{
          const reviewData = review.r;
@@ -58,10 +54,9 @@ export default function MyReviews() {
                     updating.review = reviewData;
                     const newReviews = [updating, ...remaining];
                     setReviews(newReviews);
-                    alert('Update successfully');
+                    toast.success('Successfully Updated');
                 }
             })
-        // // console.log(id, review.r);
 
     }
  const handleDelete=(id)=>{
@@ -77,7 +72,8 @@ export default function MyReviews() {
                 .then(res => res.json())
                 .then(data => {
                     if (data.deletedCount > 0) {
-                        alert('deleted successfully');
+                        // alert('deleted successfully');
+                        toast.success('Successfully Deleted!')
                         const remaining = reviews.filter(review => review._id !== id);
                         setReviews(remaining);
                     }
@@ -86,7 +82,14 @@ export default function MyReviews() {
      
  }
   return (
-    <div className='container'>
+     <>
+     {
+      myReviewLoader? <div className='mt-3 d-flex justify-content-center'><Spinner variant='primary' animation='border' ></Spinner></div>:<>
+        <div className='container'>
+      <Toaster
+  position="top-center"
+  reverseOrder={false}
+/>
          {
     reviews.map((review)=><MyReview key={review._id}
     review={review}
@@ -95,5 +98,10 @@ export default function MyReviews() {
     ></MyReview>)
   }  
     </div>
+      
+      
+      </>
+     }
+     </>
   )
 }
