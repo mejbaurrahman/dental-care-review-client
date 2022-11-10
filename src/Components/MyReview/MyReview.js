@@ -27,7 +27,7 @@ export default function MyReview({review, handleDelete, handleUpdate}) {
         </div>
         <div className='col'>
             <div className='d-flex justify-content-start align-items-center'>
-               <p>review: {review.review}</p>
+               <p>Review: {review.review}</p>
             </div>
         </div>
         <div className='col'>

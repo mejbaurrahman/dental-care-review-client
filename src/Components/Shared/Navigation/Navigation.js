@@ -21,12 +21,12 @@ export default function Navigation() {
             <Link className='text-white text-decoration-none ms-2 px-2' to='/'>Home</Link>
             <Link className='text-white text-decoration-none ms-2 px-2' to='/services'>Services</Link>
             <Link className='text-white text-decoration-none ms-2 px-2' to='/blog'>Blog</Link>
-            <Link to='/addAService' className='text-white text-decoration-none ms-2 px-2'>Add A Service</Link>
-            <Link to='/myreviews' className='text-white text-decoration-none ms-2 px-2'>My Reviews</Link>
+ 
             
           {
             user?.uid ? <>
-            
+            <Link to='/addAService' className='text-white text-decoration-none ms-2 px-2'>Add A Service</Link>
+            <Link to='/myreviews' className='text-white text-decoration-none ms-2 px-2'>My Reviews</Link>
             <Link className='text-white text-decoration-none ms-2 px-2' to='/'>{user?.displayName}</Link>
             <button className='btn btn-warning' onClick={logout}>logout</button>
 

@@ -86,7 +86,10 @@ export default function MyReviews() {
   return (
      <>
      {
-      myReviewLoader? <div className='mt-3 d-flex justify-content-center'><Spinner variant='primary' animation='border' ></Spinner></div>:<>
+      myReviewLoader? <div className='mt-3 d-flex justify-content-center'><Spinner variant='primary' animation='border' ></Spinner></div>:
+      <>
+      {
+        reviews.length? <>
         <div className='container'>
       <Toaster
   position="top-center"
@@ -101,6 +104,9 @@ export default function MyReviews() {
   }  
     </div>
       
+      
+      </>:<div className='my-3'>You have not added reviews yet !</div>
+      }
       
       </>
      }
