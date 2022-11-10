@@ -1,12 +1,14 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useState } from 'react';
 import { Spinner, Toast } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
-import useTitle from '../hooks/useTitle'
+import useTitle from '../hooks/useTitle';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 
 export default function Login() {
     useTitle('Login');
-    const {user, login,setShow, setUser} = useContext(AuthContext);
+    const {user, login,setShow, setUser, googleLogin} = useContext(AuthContext);
     const [loadingLogin, setLoadingLogin] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
@@ -40,16 +42,41 @@ export default function Login() {
           setShow(true);
           setLoadingLogin(false);
           navigate(from, { replace: true });
-        })
-       
-        // console.log(user);
-        
+        }) 
         
       })
       .catch((error)=>{
         console.log(error.message);
       })
       
+    }
+
+    const handleGoogleLogin =(e)=>{
+      e.preventDefault();
+      googleLogin()
+      .then((result) => {
+        
+        const user = result.user;
+        const currentUser = {email:user.email};
+        fetch(`http://localhost:5000/jwt`,{
+          method:'POST',
+          headers:{
+            'content-type':'application/json'
+          },
+          body: JSON.stringify(currentUser)
+        }).then(res=>res.json())
+        .then(data=>{
+          console.log(data);
+          localStorage.setItem('token', data.token);
+          setShow(true);
+          setLoadingLogin(false);
+          navigate(from, { replace: true });
+        })
+
+
+      }).catch((error) => {
+        console.log(error.message);
+      });
     }
     // const handleLogin =(e)=>{
 
@@ -91,6 +118,8 @@ export default function Login() {
         <button className='btn btn-primary' type="submit">Log in</button>
       </form>
       <br />
+      <hr className='text-primary'/>
+      <button className='btn btn-outline-primary my-2' onClick={handleGoogleLogin}>Google Sign in <FontAwesomeIcon icon={faGoogle}></FontAwesomeIcon></button>
       <h5>New User? Please <Link to='/register'>Register</Link> </h5>
     </div>
     

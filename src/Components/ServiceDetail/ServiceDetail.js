@@ -15,7 +15,7 @@ export default function ServiceDetail() {
   const {user} = useContext(AuthContext);
   const loader = useLoaderData();
   const {serviceName, price, rating, description, _id, img} = loader;
-  useTitle(`${serviceName}`)
+  useTitle(`service: ${serviceName}`)
   useEffect(()=>{
     fetch(`http://localhost:5000/serviceReviews?serviceId=${_id}`)
     .then(res=>res.json())
@@ -102,6 +102,7 @@ export default function ServiceDetail() {
             <button className='btn btn-primary' type="submit">Review</button>
             </div>
         </form>
+        
         </>:<div className='text-start mx-3'>
           Please <Link to='/login'>Login</Link> to give reviews.
         </div>

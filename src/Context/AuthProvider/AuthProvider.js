@@ -1,8 +1,8 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from '../../Firebase/Firebase.init';
 import { Alert } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 
 export const AuthContext = createContext();
@@ -13,7 +13,7 @@ export default function AuthProvider({children}) {
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(true);
     const [show, setShow] = useState(false);
-    // const navigate = useNavigate();
+    const googleProvider = new GoogleAuthProvider();
     const updateUser=(name, photoURL)=>{
         setLoading(true);
         updateProfile(auth.currentUser, {
@@ -40,10 +40,13 @@ export default function AuthProvider({children}) {
         
     }
 
-
+    const googleLogin=()=>{
+      setLoading(true);
+      return signInWithPopup(auth, googleProvider);
+    }
     const logout =()=>{
         setLoading(true);
-        return signOut(auth);
+       return signOut(auth);
     }
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth, user=>{
@@ -57,7 +60,7 @@ export default function AuthProvider({children}) {
     }, [user?.displayName])
     
 
-    const authInfo= {registration, login, logout,loading, show, setShow, user, updateUser,setUser};
+    const authInfo= {registration, login,googleLogin, logout,loading, show, setShow, user, updateUser,setUser};
   return (
     <AuthContext.Provider value={authInfo}>
         {children}
