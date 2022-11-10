@@ -5,7 +5,8 @@ import Review from '../Review/Review';
 
 export default function ServiceDetail() {
   const [reviews, setReviews] = useState([]);
-
+  const [newReview, setNewReview] = useState('');
+  const [rLoad, setRLoad] = useState(true);
   const {user} = useContext(AuthContext);
   const loader = useLoaderData();
   const {serviceName, price, rating, description, _id, img} = loader;
@@ -17,12 +18,14 @@ export default function ServiceDetail() {
       // console.log(data);
      const r= data.sort(function(a, b){return a.time - b.time}).reverse();
       setReviews(r);
+      setRLoad(false)
   })
 
-  }, [reviews])
+  }, [newReview])
 
   const handleAddReview =(e)=>{
       e.preventDefault();
+      setRLoad(true);
       const form = e.target;
       const review= form.review.value;
       console.log(review);
@@ -49,7 +52,8 @@ export default function ServiceDetail() {
       .then(data=>{
         console.log(data);
         setReviews(data);
-        alert('Insert review successfully');
+        setNewReview(review);
+        // alert('Insert review successfully');
         form.reset();
       }).catch(error=>{
         console.log(error);
@@ -72,12 +76,16 @@ export default function ServiceDetail() {
     </div>
   </div>
 </div>
-<div className='mt-3 w-75'>
+<div className='mt-5'>
+  <div>
+    <h5 className='text-primary text-start'>Review of this Service</h5>
+    <hr className='text-primary'/>
+  </div>
     {
         user?.uid ?<>
         <form onSubmit={handleAddReview}>
-            <textarea name="review" id="" className='w-100  ms-3' placeholder='give your review'></textarea> <br></br>
-            <div className='d-flex justify-content-start ms-3'>
+            <textarea name="review" id="" className='w-100  ' placeholder='give your review'></textarea> <br></br>
+            <div className='d-flex justify-content-start'>
             <button className='btn btn-primary' type="submit">Review</button>
             </div>
         </form>
@@ -86,13 +94,15 @@ export default function ServiceDetail() {
         </div>
     }
 </div>
-<div className='my-3'>
-    {
-      reviews.map((review)=><Review key={review._id}
-      review={review}
-      ></Review>)
-    }    
+{
+  rLoad? <></>:<div className='my-3'>
+  {
+    reviews.map((review)=><Review key={review._id}
+    review={review}
+    ></Review>)
+  }    
 </div>
+}
     </div>
   )
 }
