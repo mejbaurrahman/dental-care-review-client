@@ -7,6 +7,7 @@ import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import useTitle from '../hooks/useTitle';
 import Review from '../Review/Review';
 import { faStar, faMoneyCheck } from '@fortawesome/free-solid-svg-icons'
+import { PhotoProvider, PhotoView } from 'react-photo-view';
 
 export default function ServiceDetail() {
   const [reviews, setReviews] = useState([]);
@@ -74,7 +75,12 @@ export default function ServiceDetail() {
 <div className="card mb-3 my-5 border border-1 border-primary" >
   <div className="row g-0">
     <div className="col-md-4">
-      <img src={img} className="img-fluid rounded-start" style={{objectFit:'cover', height:'100%'}} alt="..."/>
+      {/* <img src={img} className="img-fluid rounded-start" style={{objectFit:'cover', height:'100%'}} alt="..."/> */}
+      <PhotoProvider>
+      <PhotoView src={img}>
+      <img src={img} alt="" srcset="" className='img-fluid' style={{height:'100%', objectFit:'cover'}} />
+      </PhotoView>
+    </PhotoProvider>
     </div>
     <div className="col-md-8">
       <div className="card-body">

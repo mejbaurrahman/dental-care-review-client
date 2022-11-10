@@ -20,6 +20,10 @@ export default function Services() {
   
   return (
    <>
+   <div className='mt-3 container'>
+        <h1 className='text-primary text-start text-uppercase'>Services</h1>
+        <hr className='text-primary'/> 
+    </div>
     {
       loadServices? <div className='mt-3'>
         <Spinner variant='primary' animation='border'></Spinner>

@@ -13,7 +13,6 @@ export default function Service({service}) {
     <Card className='h-100'>
     <PhotoProvider>
       <PhotoView src={img}>
-      {/* <Card.Img variant="top" src={img} style={{height:'250px'}} /> */}
       <img src={img} alt="" srcset="" style={{height:'250px', objectFit:'cover'}} />
       </PhotoView>
     </PhotoProvider>

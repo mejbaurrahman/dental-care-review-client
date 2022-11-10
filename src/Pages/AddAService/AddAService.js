@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Spinner } from 'react-bootstrap';
+import toast, { Toaster } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 
 export default function AddAService() {
@@ -7,6 +8,7 @@ export default function AddAService() {
     const [loadingService, setLoadingService]= useState(false);
     const [service, setService] = useState({});
     const handleAddService =(e)=>{
+       setLoadingService(true);
         e.preventDefault();
         const form = e.target;
         const serviceName = form.serviceName.value; 
@@ -29,18 +31,23 @@ export default function AddAService() {
         }).then(res=>res.json())
         .then(data=>{
           console.log(data);
-          alert('Insert service successfully');
+          toast.success("Added service Succesfully");
+          setLoadingService(false)
           form.reset();
         }).catch(error=>{
           console.log(error);
         })
     }
   return (
+    <>
+        <Toaster
+      position="top-center"
+      reverseOrder={false}
+    />
     <div className='d-flex justify-content-center align-items-center'>
       <div className=' w-75 p-lg-5 px-2'>
     {
-      loadingService&& <Spinner className='my-5' animation="border" role="status">
-      <span className="visually-hidden">Loading...</span>
+      loadingService&& <Spinner className='my-5' animation="border" variant='primary'>
     </Spinner>
     }
       <h1 className='text-center my-3 fw-bold'>Add A Service</h1>
@@ -58,5 +65,6 @@ export default function AddAService() {
     </div>
     
     </div>
+    </>
   )
 }
