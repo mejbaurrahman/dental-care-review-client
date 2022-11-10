@@ -14,6 +14,7 @@ export default function ServiceDetail() {
   const [newReview, setNewReview] = useState('');
   const [rLoad, setRLoad] = useState(true);
   const {user} = useContext(AuthContext);
+  const [length, setLength]= useState(null);
   const loader = useLoaderData();
   const {serviceName, price, rating, description, _id, img} = loader;
   useTitle(`Service: ${serviceName}`)
@@ -22,6 +23,7 @@ export default function ServiceDetail() {
     .then(res=>res.json())
     .then(data=>{
       // console.log(data);
+      setLength(data.length);
      const r= data.sort(function(a, b){return a.time - b.time}).reverse();
       setReviews(r);
       setRLoad(false)
@@ -115,13 +117,18 @@ export default function ServiceDetail() {
     }
 </div>
 {
-  rLoad? <><Spinner variant="primary" animation="grow" /></>:<div className='my-3'>
-  {
-    reviews.map((review)=><Review key={review._id}
-    review={review}
-    ></Review>)
-  }    
-</div>
+  rLoad? <><Spinner variant="primary" animation="grow" /></>:
+ <>
+   {
+    reviews.length?  <div className='my-3'>
+    {
+      reviews.map((review)=><Review key={review._id}
+      review={review}
+      ></Review>)
+    }    
+  </div>: <div className='my-3'>No reviews are added</div>
+   }
+ </>
 }
     </div>
   )
