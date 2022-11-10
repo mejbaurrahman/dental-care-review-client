@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       },
       {
         path:'/service/:id',
-        loader: ({params})=>fetch(`https://dental-care-server.vercel.app/${params.id}`),
+        loader: ({params})=>fetch(`https://dental-care-server.vercel.app/service/${params.id}`),
         element:<ServiceDetail></ServiceDetail>
       },
       {

@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useEffect, useState } from 'react'
 import { Spinner } from 'react-bootstrap';
 import toast, { Toaster } from 'react-hot-toast';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData, useParams } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import useTitle from '../hooks/useTitle';
 import Review from '../Review/Review';
@@ -16,13 +16,22 @@ export default function ServiceDetail() {
   const {user} = useContext(AuthContext);
   const [length, setLength]= useState(null);
   const loader = useLoaderData();
+  // const [loader, setLoader] = useState({})
+  // let { id } = useParams();
+  // console.log(id);
+  // useEffect(()=>{
+  //   fetch(`https://dental-care-server.vercel.app/services/${id}`)
+  //   .then(res=>res.json())
+  //   .then(data=>{
+  //     console.log(data);
+  //   })
+  // })
   const {serviceName, price, rating, description, _id, img} = loader;
   useTitle(`Service: ${serviceName}`)
   useEffect(()=>{
-    fetch(`https://dental-care-server.vercel.app/serviceReviews?serviceId=${_id}`)
+    fetch(`http://localhost:5000/serviceReviews?serviceId=${_id}`)
     .then(res=>res.json())
     .then(data=>{
-      // console.log(data);
       setLength(data.length);
      const r= data.sort(function(a, b){return a.time - b.time}).reverse();
       setReviews(r);
@@ -50,7 +59,7 @@ export default function ServiceDetail() {
           time
       };
      
-      fetch('https://dental-care-server.vercel.app/reviews',{
+      fetch('http://localhost:5000/reviews',{
         method:'POST',
         headers:{
           'content-type': 'application/json'
@@ -126,7 +135,7 @@ export default function ServiceDetail() {
       review={review}
       ></Review>)
     }    
-  </div>: <div className='my-3'>No reviews are added</div>
+  </div>: <div>No reviews are added</div>
    }
  </>
 }
