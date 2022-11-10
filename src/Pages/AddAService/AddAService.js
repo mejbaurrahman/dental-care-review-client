@@ -23,7 +23,7 @@ export default function AddAService() {
 
         // setService(serviceData);
         
-        fetch('http://localhost:5000/services',{
+        fetch('https://dental-care-server.vercel.app/services',{
           method:'POST',
           headers:{
             'content-type': 'application/json'

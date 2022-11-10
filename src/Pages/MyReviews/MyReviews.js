@@ -12,7 +12,7 @@ export default function MyReviews() {
   const [myReviewLoader, setMyReviewLoader] = useState(true);
   useTitle('My Reviews')
   useEffect(()=>{
-    fetch(`http://localhost:5000/reviews?email=${user?.email}`,{
+    fetch(`https://dental-care-server.vercel.app/reviews?email=${user?.email}`,{
       headers:{
         authorization: `Bearer ${localStorage.getItem('token')}`
       }
@@ -38,7 +38,7 @@ export default function MyReviews() {
  const handleUpdate=(id,review)=>{
          const reviewData = review.r;
          console.log(reviewData);
-        fetch(`http://localhost:5000/reviews/${id}`, {
+        fetch(`https://dental-care-server.vercel.app/reviews/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',
@@ -65,7 +65,7 @@ export default function MyReviews() {
     const confirm = window.confirm('Are you want to delete? ');
     if(confirm)
      {
-      fetch(`http://localhost:5000/reviews/${id}`, {
+      fetch(`https://dental-care-server.vercel.app/reviews/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'content-type':'application/json'

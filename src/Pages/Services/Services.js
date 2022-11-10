@@ -9,7 +9,7 @@ export default function Services() {
   const [loadServices, setLoadServices] = useState(true);
 
   useEffect(()=>{
-    fetch('http://localhost:5000/services')
+    fetch('https://dental-care-server.vercel.app/services')
     .then(res=>res.json())
     .then(data=>{
       setServices(data);

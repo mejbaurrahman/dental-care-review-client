@@ -19,7 +19,7 @@ export default function ServiceDetail() {
   const {serviceName, price, rating, description, _id, img} = loader;
   useTitle(`Service: ${serviceName}`)
   useEffect(()=>{
-    fetch(`http://localhost:5000/serviceReviews?serviceId=${_id}`)
+    fetch(`https://dental-care-server.vercel.app/serviceReviews?serviceId=${_id}`)
     .then(res=>res.json())
     .then(data=>{
       // console.log(data);
@@ -50,7 +50,7 @@ export default function ServiceDetail() {
           time
       };
      
-      fetch('http://localhost:5000/reviews',{
+      fetch('https://dental-care-server.vercel.app/reviews',{
         method:'POST',
         headers:{
           'content-type': 'application/json'

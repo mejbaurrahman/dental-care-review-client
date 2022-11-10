@@ -16,7 +16,7 @@ export default function Home() {
   const [services, setServices] = useState([]);
   const [loadHome, setLoadHome] = useState(true);
   useEffect(()=>{
-    fetch('http://localhost:5000/hservices')
+    fetch('https://dental-care-server.vercel.app/hservices')
     .then(res=>res.json())
     .then(data=>{
       setServices(data);

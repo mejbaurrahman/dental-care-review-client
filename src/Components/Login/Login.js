@@ -29,7 +29,7 @@ export default function Login() {
         const user = userCredential.user;
         
         const currentUser = {email:user.email};
-        fetch(`http://localhost:5000/jwt`,{
+        fetch(`https://dental-care-server.vercel.app/jwt`,{
           method:'POST',
           headers:{
             'content-type':'application/json'
@@ -58,7 +58,7 @@ export default function Login() {
         
         const user = result.user;
         const currentUser = {email:user.email};
-        fetch(`http://localhost:5000/jwt`,{
+        fetch(`https://dental-care-server.vercel.app/jwt`,{
           method:'POST',
           headers:{
             'content-type':'application/json'
