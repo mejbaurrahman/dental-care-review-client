@@ -5,7 +5,7 @@ import contactImage from '../../images/textImage.jpg';
 
 export default function About() {
   return (
-    <div className='mt-3'>
+    <div data-aos="fade-up" className='mt-3'>
     <h1 className='text-primary text-start text-uppercase'>About MDC</h1>
     <hr className='text-primary'/> 
     <div className='row row-cols-lg-2 row-cols-1 g-2 my-2'>

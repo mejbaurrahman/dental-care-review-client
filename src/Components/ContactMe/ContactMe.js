@@ -5,7 +5,7 @@ import contactImage from '../../images/doctor.jpg';
 
 export default function ContactMe() {
   return (
-    <div className='mt-3'>
+    <div data-aos="fade-up" className='mt-3'>
         <h1 className='text-primary text-start text-uppercase'>Contact Me</h1>
         <hr className='text-primary'/> 
         <div className='row row-cols-lg-2 row-cols-1'>

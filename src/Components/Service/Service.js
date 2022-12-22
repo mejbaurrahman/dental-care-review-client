@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default function Service({service}) {
     const {serviceName, img, rating, _id, price, description}= service;
   return (
-    <div>
+    <div data-aos="fade-up">
     <Card className='h-100'>
     <PhotoProvider>
       <PhotoView src={img}>
