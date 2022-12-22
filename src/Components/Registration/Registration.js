@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
@@ -6,11 +6,13 @@ import useTitle from '../hooks/useTitle'
 
 export default function Registration() {
     useTitle('Registration');
+    const [authError, setAuthError] = useState('');
     const {registration, updateUser, logout} = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const handleRegister =(e)=>{
          e.preventDefault();
+         setAuthError('')
           const form = e.target;
           const name = form.name.value;
           const photoURL = form.photoURL.value;
@@ -29,6 +31,7 @@ export default function Registration() {
         })
         .catch((error)=>{
             console.log(error.message);
+            setAuthError(error.message);
         })
 ;
     }
@@ -49,6 +52,9 @@ export default function Registration() {
         <button className='btn btn-primary' type="submit">Register</button>
       </form>
       <br />
+      {
+        authError && <p className='text-center text-danger'>{authError}</p>
+      }
       <h5>Already User? Please <Link to='/login'>Login</Link> </h5>
     </div>
     </div>

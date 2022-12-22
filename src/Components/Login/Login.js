@@ -10,6 +10,7 @@ export default function Login() {
     useTitle('Login');
     const {user, login,setShow, setUser, googleLogin} = useContext(AuthContext);
     const [loadingLogin, setLoadingLogin] = useState(false);
+    const [authError, setAuthError] = useState('');
     const location = useLocation();
     const navigate = useNavigate();
     
@@ -17,8 +18,9 @@ export default function Login() {
     const from = location.state?.from?.pathname || '/';
     
     const handleLogin =(e)=>{
-
+      
       e.preventDefault();
+      setAuthError('')
       setLoadingLogin(true);
       const form = e.target;
       const email = form.email.value;
@@ -46,13 +48,15 @@ export default function Login() {
         
       })
       .catch((error)=>{
-        console.log(error.message);
+        setAuthError(error.message);
+        setLoadingLogin(false);
       })
       
     }
 
     const handleGoogleLogin =(e)=>{
       e.preventDefault();
+      setAuthError('');
       googleLogin()
       .then((result) => {
         
@@ -76,33 +80,12 @@ export default function Login() {
 
       }).catch((error) => {
         console.log(error.message);
+        setAuthError(error.message);
+        setLoadingLogin(false);
+
       });
     }
-    // const handleLogin =(e)=>{
-
-    //   e.preventDefault();
-    //   setLoadingLogin(true);
-    //   const form = e.target;
-    //   const email = form.email.value;
-    //   const password = form.password.value;
-      
-    //   login(email, password)
-    //   .then(userCredential=>{
-    //     const result = userCredential.user;
-    //     setShow(true);
-    //     setLoadingLogin(false);
-        
-
-    //     navigate(from, { replace: true });
-    //     console.log(result);
-        
-        
-    //   })
-    //   .catch((error)=>{
-    //     console.log(error.message);
-    //   })
-      
-    // }
+  
   return (
     <div className='d-flex justify-content-center align-items-center'>
       <div className='w-50'>
@@ -118,6 +101,9 @@ export default function Login() {
         <button className='btn btn-primary' type="submit">Log in</button>
       </form>
       <br />
+      {
+        authError && <p className='text-center text-danger'>{authError}</p>
+      }
       <hr className='text-primary'/>
       <button className='btn btn-outline-primary my-2' onClick={handleGoogleLogin}>Google Sign in <FontAwesomeIcon icon={faGoogle}></FontAwesomeIcon></button>
       <h5>New User? Please <Link to='/register'>Register</Link> </h5>
